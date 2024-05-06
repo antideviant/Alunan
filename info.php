@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="w3.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
 <style>
 a:link {
   text-decoration: none;
@@ -44,6 +48,13 @@ input.cpwd {
 .w3-merah,.w3-hover-merah:hover{color:#fff!important;background-color:#fe0000!important}
 
 img[alt="www.000webhost.com"]{display:none}
+
+.hedvig-letters-serif {
+  font-family: "Hedvig Letters Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 </style>
 
 <body class="bgimg-1 w3-brown">
@@ -55,9 +66,10 @@ img[alt="www.000webhost.com"]{display:none}
 		<div class="w3-padding-32"></div>
 		<div class="w3-padding-64"></div>
 		<div class="w3-center"><img src="images/logo.png" width="200px" class="w3-image w3-round"></div>
-		<div class="w3-padding w3-large"><b>Alunan</b></div>
-		Developed by @kamalazim<br>
-		@2024 Alunan. All Right Reserved.
+		<div class="w3-padding w3-large hedvig-letters-serif"><b>Alunan</b></div>
+		Made with ❤️ by @kamalazim<br> 
+		View the code at GitHub: <a href="https://github.com/antideviant/alunan" target="_blank"><i class="fab fa-github"></i></a><br><hr>
+		<i>@2024 Alunan. All Rights Reserved.</i>
     </div>
 	</div>
 </div>
