@@ -89,7 +89,7 @@ img[alt="www.000webhost.com"]{display:none}
 				<b class="w3-padding">Feed</b>
 			</div>
 			<div class="w3-col s2">
-				<i class="fa fa-fw fa-rss fa-2x "></i>
+				<i class="fa fa-fw fa-newspaper fa-2x "></i>
 			</div>
 		</div>
 		</a>
@@ -102,26 +102,13 @@ img[alt="www.000webhost.com"]{display:none}
 				<b class="w3-padding">My Post</b>
 			</div>
 			<div class="w3-col s2">
-				<i class="fa fa-fw fa-file-alt fa-2x "></i>
+				<i class="fa fa-fw fa-edit fa-2x "></i>
 			</div>
 		</div>
 		</a>
 		
-		<div class="w3-padding-16"></div>
-
-		<a href="profile.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown ">
-		<div class="w3-row w3-xlarge w3-padding-16 ">
-			<div class="w3-col s10">
-				<b class="w3-padding">User Profile</b>
-			</div>
-			<div class="w3-col s2">
-				<i class="fa fa-fw fa-user fa-2x "></i>
-			</div>
-		</div>
-		</a>
-
 		<hr>
-		
+
 		<a href="post-add.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge " style="background-color: #3F331F; color: white;">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col s10">
@@ -129,6 +116,19 @@ img[alt="www.000webhost.com"]{display:none}
 			</div>
 			<div class="w3-col s2">
 				<i class="fa fa-fw fa-plus-circle fa-2x "></i>
+			</div>
+		</div>
+		</a>
+		
+		<hr>
+
+		<a href="profile.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge" style="background-color: #97704F; color: white;">
+		<div class="w3-row w3-xlarge w3-padding-16 ">
+			<div class="w3-col s10">
+				<b class="w3-padding">User Profile</b>
+			</div>
+			<div class="w3-col s2">
+				<i class="fa fa-fw fa-user fa-2x "></i>
 			</div>
 		</div>
 		</a>

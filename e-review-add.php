@@ -103,9 +103,42 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-containerx w3-padding" id="contact">
     <div class="w3-content w3-containerx w3-padding" style="max-width:600px">	
-			
+	
+	<?PHP
+		$bil = 0;
+		$SQL_list = "SELECT * FROM `post`,`user` WHERE post.id_user = user.id_user AND `id_post` = $id_post";
+		$result = mysqli_query($con, $SQL_list) ;
+		while ( $data	= mysqli_fetch_array($result) )
+		{
+			$bil++;
+			$id_post= $data["id_post"];
+			$post	= $data["post"];
+			$date	= $data["date"];
+			$name	= $data["name"];
+			$photo2		= $data["photo"];
+			if(!$photo2) $photo2 = "noimage.png";
+		?>	
+		
+		<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
+			<div class="w3-row w3-small w3-padding-16 ">
+				<div class="w3-col s3 w3-padding-16 w3-padding-small">
+					<img src="upload/<?PHP echo $photo2;?>" class="w3-circle w3-image w3-border" ></a>
+				</div>
+				<div class="w3-col s7" style="line-height: 1.3;">
+					<b><?PHP echo $name;?></b><br>
+					<textarea rows="6" class="w3-small w3-block w3-border w3-border-white"><?PHP echo $post;?></textarea>		
+				</div>
+				<div class="w3-col s2 w3-center">
+					<div class="w3-text-grey"><?PHP echo get_time_ago( strtotime($date) );?></div>
+				</div>
+			</div>
+		</div>
+		
+		<?PHP } ?>
+		
+		<hr>
+
 		<form action="" method="post"  >
-			 
 			<div class="w3-section" >
 				Rating<br>
 				<input class="w3-radio w3-border w3-padding " type="radio" name="rating" value="1" checked> 1 &nbsp;

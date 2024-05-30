@@ -34,7 +34,7 @@ if($act == "login")
 		if($role == "Musician")
 			header("Location:main.php");
 		else
-			header("Location:e-main.php");
+			header("Location:e-post.php");
 	}else{
 		$error = "Invalid Login";
 		header("refresh:1;url=index.php");

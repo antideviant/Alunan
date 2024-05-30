@@ -57,6 +57,15 @@ input.cpwd {
 .w3-lightbrown,.w3-hover-lightbrown:hover{color:#fff!important;background-color:#c89a4b!important}
 
 img[alt="www.000webhost.com"]{display:none}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 550px;
+}
 </style>
 
 <body class="w3-white">
@@ -82,7 +91,8 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-padding" id="contact">
     <div class="w3-content w3-padding" style="max-width:600px">	
-			
+		<input type="text" id="searchInput" onkeyup="searchPosts()" placeholder="Search by musician name...">
+
         <?php
         $bil = 0;
         // Assuming $con is your database connection
@@ -141,7 +151,23 @@ img[alt="www.000webhost.com"]{display:none}
 		</div>
 	</div>
 </div>
-
-
+<script>
+    function searchPosts() {
+        var input, filter, posts, post, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        posts = document.getElementsByClassName('w3-panel');
+        
+        for (var i = 0; i < posts.length; i++) {
+            post = posts[i];
+            txtValue = post.textContent || post.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                post.style.display = "";
+            } else {
+                post.style.display = "none";
+            }
+        }
+    }
+</script>
 </body>
 </html>

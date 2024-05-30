@@ -25,7 +25,7 @@ if($act == "add_favourite")
 	
 	$success = "Successfully Added";
 	
-	print "<script>self.location='e-mprofile.php?mid_user=$mid_user';</script>";
+	print "<script>self.location='e-mprofile2.php?mid_user=$mid_user';</script>";
 }
 
 if($act == "del_favourite")
@@ -37,7 +37,7 @@ if($act == "del_favourite")
 	
 	$success = "Successfully Removed";
 	
-	print "<script>self.location='e-mprofile.php?mid_user=$mid_user';</script>";
+	print "<script>self.location='e-mprofile2.php?mid_user=$mid_user';</script>";
 }
 
 $follow_found	= numRows($con, "SELECT * FROM `favourite` WHERE `id_user` = '$id_user' AND `mid_user` = '$mid_user'");
@@ -163,7 +163,7 @@ img[alt="www.000webhost.com"]{display:none}
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-large w3-white w3-padding-16 ">
 			<div class="w3-col  s6">				
-				<a href="e-post.php"><i class="fa fa-fw fa-arrow-circle-left fa-3x"></i></a>
+				<a href="e-allmusician.php"><i class="fa fa-fw fa-arrow-circle-left fa-3x"></i></a>
 			</div>
 		</div>
 	</div>

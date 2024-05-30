@@ -83,20 +83,33 @@ img[alt="www.000webhost.com"]{display:none}
 <div class="w3-padding" id="contact">
     <div class="w3-content w3-xxlarge w3-padding" style="max-width:600px">	
 			
-		<a href="e-post.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown ">
+		<a href="e-post.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col s10">
-				<b class="w3-padding">Post</b>
+				<b class="w3-padding">Feed</b>
 			</div>
 			<div class="w3-col s2">
-				<i class="fa fa-fw fa-file-alt fa-2x "></i>
+				<i class="fa fa-fw fa-newspaper fa-2x "></i>
 			</div>
 		</div>
 		</a>
 		
-		<div class="w3-padding-small"></div>
+		<div class="w3-padding-16"></div>
+
+		<a href="e-myreview.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown">
+		<div class="w3-row w3-xlarge w3-padding-16 ">
+			<div class="w3-col s10">
+				<b class="w3-padding">My Review</b>
+			</div>
+			<div class="w3-col s2">
+				<i class="fa fa-fw fa-pen-square fa-2x "></i>
+			</div>
+		</div>
+		</a>
+
+		<div class="w3-padding-16"></div>
 		
-		<a href="e-favourite.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown ">
+		<a href="e-favourite.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge" style="background-color: #be7333; color: white;">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col s10">
 				<b class="w3-padding">Favourite</b>
@@ -106,23 +119,23 @@ img[alt="www.000webhost.com"]{display:none}
 			</div>
 		</div>
 		</a>
-		
-		<div class="w3-padding-small"></div>
-		
-		<a href="e-myreview.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown ">
+
+		<hr>
+
+		<a href="e-allmusician.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge" style="background-color: #310a0b; color: white;">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col s10">
-				<b class="w3-padding">My Review</b>
+				<b class="w3-padding">Musicians</b>
 			</div>
 			<div class="w3-col s2">
-				<i class="fa fa-fw fa-comment-alt fa-2x "></i>
+				<i class="fa fa-fw fa-guitar fa-2x "></i>
 			</div>
 		</div>
 		</a>
-		
-		<div class="w3-padding-small"></div>
-		
-		<a href="e-profile.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge w3-lightbrown ">
+
+		<hr>
+
+		<a href="e-profile.php" class="w3-buttonx w3-padding w3-block w3-round-xlarge" style="background-color: #97704F; color: white;">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col s10">
 				<b class="w3-padding">User Profile</b>
@@ -132,7 +145,7 @@ img[alt="www.000webhost.com"]{display:none}
 			</div>
 		</div>
 		</a>
-
+		
 	</div>
 </div>
 

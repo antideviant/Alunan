@@ -4,19 +4,23 @@ session_start();
 include("database.php");
 if( !verifyUser($con) ) 
 {
-	header( "Location: index.php" );
-	return false;
+    header( "Location: index.php" );
+    return false;
 }
 ?>
 <?PHP
-$id_user	= $_SESSION["id_user"];
+$id_user = $_SESSION["id_user"];
 
-$id_post 	= (isset($_REQUEST['id_post'])) ? trim($_REQUEST['id_post']) : '';
+$id_post = (isset($_REQUEST['id_post'])) ? trim($_REQUEST['id_post']) : '';
 
-$SQL_list 	= "SELECT * FROM `user` WHERE `id_user` = '$id_user'  ";
-$result 	= mysqli_query($con, $SQL_list) ;
-$data		= mysqli_fetch_array($result);
-$photo		= $data["photo"];
+if (empty($id_post)) {
+    die('Error: id_post is not set.');
+}
+
+$SQL_list = "SELECT * FROM `user` WHERE `id_user` = '$id_user'";
+$result = mysqli_query($con, $SQL_list);
+$data = mysqli_fetch_array($result);
+$photo = $data["photo"];
 if(!$photo) $photo = "noimage.png";
 ?>
 <!DOCTYPE html>
@@ -65,7 +69,6 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-padding-small"></div>
 
-
 <div class="w3-padding">
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
@@ -79,7 +82,6 @@ img[alt="www.000webhost.com"]{display:none}
 	</div>
 </div>
 
-
 <!-- content -->	
 
 <div class="w3-padding" id="contact">
@@ -88,22 +90,22 @@ img[alt="www.000webhost.com"]{display:none}
 		<?PHP
 		$bil = 0;
 		$SQL_list = "SELECT * FROM `post`,`user` WHERE post.id_user = user.id_user AND `id_post` = $id_post";
-		$result = mysqli_query($con, $SQL_list) ;
-		while ( $data	= mysqli_fetch_array($result) )
+		$result = mysqli_query($con, $SQL_list);
+		while ( $data = mysqli_fetch_array($result) )
 		{
 			$bil++;
-			$id_post= $data["id_post"];
-			$post	= $data["post"];
-			$date	= $data["date"];
-			$name	= $data["name"];
-			$photo2		= $data["photo"];
+			$id_post = $data["id_post"];
+			$post = $data["post"];
+			$date = $data["date"];
+			$name = $data["name"];
+			$photo2 = $data["photo"];
 			if(!$photo2) $photo2 = "noimage.png";
 		?>	
 		
 		<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
 			<div class="w3-row w3-small w3-padding-16 ">
 				<div class="w3-col s3 w3-padding-16 w3-padding-small">
-					<img src="upload/<?PHP echo $photo2;?>" class="w3-circle w3-image w3-border" ></a>
+					<img src="upload/<?PHP echo $photo2;?>" class="w3-circle w3-image w3-border"></a>
 				</div>
 				<div class="w3-col s7" style="line-height: 1.3;">
 					<b><?PHP echo $name;?></b><br>
@@ -122,23 +124,23 @@ img[alt="www.000webhost.com"]{display:none}
 		<?PHP
 		$bil = 0;
 		$SQL_list = "SELECT * FROM `review`,`user` WHERE review.id_user = user.id_user AND `id_post` = $id_post";
-		$result = mysqli_query($con, $SQL_list) ;
-		while ( $data	= mysqli_fetch_array($result) )
+		$result = mysqli_query($con, $SQL_list);
+		while ( $data = mysqli_fetch_array($result) )
 		{
 			$bil++;
-			$id_user_review= $data["id_user"];
-			$id_review= $data["id_review"];
-			$rating	= $data["rating"];
-			$review	= $data["review"];
-			$name	= $data["name"];
-			$photo2		= $data["photo"];
+			$id_user_review = $data["id_user"];
+			$id_review = $data["id_review"];
+			$rating = $data["rating"];
+			$review = $data["review"];
+			$name = $data["name"];
+			$photo2 = $data["photo"];
 			if(!$photo2) $photo2 = "noimage.png";
 		?>	
 		
 		<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
 			<div class="w3-row w3-small w3-padding-16 ">
 				<div class="w3-col s3 w3-padding-16 w3-padding-small">
-					<img src="upload/<?PHP echo $photo2;?>" class="w3-circle w3-image w3-border" ></a>
+					<img src="upload/<?PHP echo $photo2;?>" class="w3-circle w3-image w3-border"></a>
 				</div>
 				<div class="w3-col s7" style="line-height: 1.3;">
 					<b><?PHP echo $name;?></b><br>
@@ -164,22 +166,20 @@ img[alt="www.000webhost.com"]{display:none}
 
 <!-- content end -->
 
-
 <div class="w3-bottom w3-padding">
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-large w3-white w3-padding-16 ">
-			<div class="w3-col  s6">
+			<div class="w3-col s6">
 				<a href="e-post.php"><i class="fa fa-fw fa-arrow-circle-left fa-3x"></i></a>
 			</div>
 			
-			<div class="w3-col  s6">
+			<div class="w3-col s6">
 				<a href="e-review-add.php?id_post=<?PHP echo $id_post;?>" class="w3-right w3-padding w3-button w3-round-xlarge w3-lightbrown">Add Review <i class="fa fa-fw fa-plus-circle"></i></a>
 			</div>
 			
 		</div>
 	</div>
 </div>
-
 
 </body>
 </html>

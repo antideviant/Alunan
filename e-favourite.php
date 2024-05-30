@@ -57,6 +57,15 @@ input.cpwd {
 .w3-lightbrown,.w3-hover-lightbrown:hover{color:#fff!important;background-color:#c89a4b!important}
 
 img[alt="www.000webhost.com"]{display:none}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 550px;
+}
 </style>
 
 <body class="w3-white">
@@ -82,27 +91,26 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-padding" id="contact">
     <div class="w3-content w3-padding" style="max-width:600px">	
-			
+		<input type="text" id="searchInput" onkeyup="searchPosts()" placeholder="Search by musician name...">
+
 		<?PHP
 		$bil = 0;
-		$SQL_fav = "SELECT * FROM `favourite` WHERE id_user = $id_user";
+		$SQL_fav = "SELECT f.*, p.*, u.* FROM `favourite` AS f 
+            INNER JOIN `post` AS p ON f.mid_user = p.id_user 
+            INNER JOIN `user` AS u ON p.id_user = u.id_user
+            WHERE f.id_user = $id_user 
+            ORDER BY p.date DESC";
 		$rst_fav = mysqli_query($con, $SQL_fav) ;
 		while ( $dat_fav = mysqli_fetch_array($rst_fav) )
 		{
-			$mid_user = $dat_fav["mid_user"]; 
-			$bil++;
-		
-			$SQL_list = "SELECT * FROM `post`,`user` WHERE post.id_user = user.id_user AND post.id_user = $mid_user ORDER BY id_post DESC";
-			$result = mysqli_query($con, $SQL_list) ;
-			while ( $data	= mysqli_fetch_array($result) )
-			{
-				$id_post= $data["id_post"];
-				$post	= $data["post"];
-				$date	= $data["date"];
-				$name	= $data["name"];
-				$mid_user	= $data["id_user"];
-				$photo2		= $data["photo"];
-				if(!$photo2) $photo2 = "noimage.png";
+			$id_post = $dat_fav["id_post"];
+			$post = $dat_fav["post"];
+			$date = $dat_fav["date"];
+			$name = $dat_fav["name"];
+			$mid_user = $dat_fav["mid_user"];
+			$photo2 = $dat_fav["photo"];
+
+			if (!$photo2) $photo2 = "noimage.png";
 		?>	
 		
 		<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
@@ -122,8 +130,8 @@ img[alt="www.000webhost.com"]{display:none}
 		</div>
 		
 		<?PHP 
-			}
-		} ?>
+		}
+		?>
 		
 		<div class="w3-padding-48"></div>
 		
@@ -147,7 +155,23 @@ img[alt="www.000webhost.com"]{display:none}
 		</div>
 	</div>
 </div>
-
-
+<script>
+    function searchPosts() {
+        var input, filter, posts, post, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        posts = document.getElementsByClassName('w3-panel');
+        
+        for (var i = 0; i < posts.length; i++) {
+            post = posts[i];
+            txtValue = post.textContent || post.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                post.style.display = "";
+            } else {
+                post.style.display = "none";
+            }
+        }
+    }
+</script>
 </body>
 </html>

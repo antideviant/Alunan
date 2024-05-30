@@ -57,6 +57,15 @@ input.cpwd {
 .w3-lightbrown,.w3-hover-lightbrown:hover{color:#fff!important;background-color:#c89a4b!important}
 
 img[alt="www.000webhost.com"]{display:none}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 550px;
+}
 </style>
 
 <body class="w3-white">
@@ -68,7 +77,7 @@ img[alt="www.000webhost.com"]{display:none}
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
 			<div class="w3-col  s10">
-				<b>Post</b>
+				<b>Feed</b>
 			</div>
 			<div class="w3-col s2">
 				<a href="e-profile.php"><img src="upload/<?PHP echo $photo;?>" class="w3-circle w3-border" style="height:70px"></a>
@@ -82,7 +91,8 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-padding" id="contact">
     <div class="w3-content w3-padding" style="max-width:600px">	
-			
+		<input type="text" id="searchInput" onkeyup="searchPosts()" placeholder="Search by musician name...">
+		
 		<?PHP
 		$bil = 0;
 		$SQL_list = "SELECT * FROM `post`,`user` WHERE post.id_user = user.id_user ORDER BY id_post DESC";
@@ -129,7 +139,7 @@ img[alt="www.000webhost.com"]{display:none}
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-large w3-white w3-padding-16 ">
 			<div class="w3-col  s6">
-				<a href="e-main.php"><i class="fa fa-fw fa-arrow-circle-left fa-3x"></i></a>
+				<a href="e-main.php"><i class="fa fa-fw fa-home fa-3x" style="color: #c89a4b;"></i></a>
 			</div>
 			<!--
 			<div class="w3-col  s6">
@@ -139,7 +149,23 @@ img[alt="www.000webhost.com"]{display:none}
 		</div>
 	</div>
 </div>
-
-
+<script>
+    function searchPosts() {
+        var input, filter, posts, post, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        posts = document.getElementsByClassName('w3-panel');
+        
+        for (var i = 0; i < posts.length; i++) {
+            post = posts[i];
+            txtValue = post.textContent || post.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                post.style.display = "";
+            } else {
+                post.style.display = "none";
+            }
+        }
+    }
+</script>
 </body>
 </html>
