@@ -1,52 +1,40 @@
-<?PHP
+<?php
 session_start();
 
 include("database.php");
-if( !verifyUser($con) ) 
-{
-	header( "Location: index.php" );
-	return false;
-}
-?>
-<?PHP
-$id_user	= $_SESSION["id_user"];
-
-$mid_user	= (isset($_GET['mid_user'])) ? trim($_GET['mid_user']) : '';
-$id_post	= (isset($_GET['id_post'])) ? trim($_GET['id_post']) : '';
-
-$act 		= (isset($_GET['act'])) ? trim($_GET['act']) : '';
-
-if($act == "add_favourite")
-{	
-	$SQL_insert = " 
-	INSERT INTO `favourite`(`id_user`, `mid_user`) VALUES ('$id_user','$mid_user')";
-										
-	$result = mysqli_query($con, $SQL_insert);
-	
-	$success = "Successfully Added";
-	
-	print "<script>self.location='e-mprofile2.php?mid_user=$mid_user';</script>";
+if (!verifyUser($con)) {
+    header("Location: index.php");
+    return false;
 }
 
-if($act == "del_favourite")
-{	
-	$SQL_delete = " 
-	DELETE FROM `favourite` WHERE `id_user` = '$id_user' AND `mid_user` = '$mid_user' ";
-										
-	$result = mysqli_query($con, $SQL_delete);
-	
-	$success = "Successfully Removed";
-	
-	print "<script>self.location='e-mprofile2.php?mid_user=$mid_user';</script>";
+$id_user = $_SESSION["id_user"];
+
+$mid_user = (isset($_GET['mid_user'])) ? trim($_GET['mid_user']) : '';
+$id_post = (isset($_GET['id_post'])) ? trim($_GET['id_post']) : '';
+
+$act = (isset($_GET['act'])) ? trim($_GET['act']) : '';
+
+if ($act == "add_favourite") {    
+    $SQL_insert = "INSERT INTO `favourite`(`id_user`, `mid_user`) VALUES ('$id_user','$mid_user')";
+    $result = mysqli_query($con, $SQL_insert);
+    $success = "Successfully Added";
+    print "<script>self.location='e-mprofile.php?mid_user=$mid_user';</script>";
 }
 
-$follow_found	= numRows($con, "SELECT * FROM `favourite` WHERE `id_user` = '$id_user' AND `mid_user` = '$mid_user'");
+if ($act == "del_favourite") {    
+    $SQL_delete = "DELETE FROM `favourite` WHERE `id_user` = '$id_user' AND `mid_user` = '$mid_user'";
+    $result = mysqli_query($con, $SQL_delete);
+    $success = "Successfully Removed";
+    print "<script>self.location='e-mprofile.php?mid_user=$mid_user';</script>";
+}
 
-$SQL_list 	= "SELECT * FROM `user` WHERE `id_user` = '$id_user'  ";
-$result 	= mysqli_query($con, $SQL_list) ;
-$data		= mysqli_fetch_array($result);
-$photo		= $data["photo"];
-if(!$photo) $photo = "noimage.png";
+$follow_found = numRows($con, "SELECT * FROM `favourite` WHERE `id_user` = '$id_user' AND `mid_user` = '$mid_user'");
+
+$SQL_list = "SELECT * FROM `user` WHERE `id_user` = '$id_user'";
+$result = mysqli_query($con, $SQL_list);
+$data = mysqli_fetch_array($result);
+$photo = $data["photo"];
+if (!$photo) $photo = "noimage.png";
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +49,7 @@ a:link {
   text-decoration: none;
 }
 
-body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
+body, h1, h2, h3, h4, h5, h6 {font-family: "Poppins", sans-serif}
 
 body, html {
   height: 100%;
@@ -94,81 +82,111 @@ img[alt="www.000webhost.com"]{display:none}
 
 <div class="w3-padding-small"></div>
 
-
 <div class="w3-padding">
 	<div class="w3-content w3-padding" style="max-width:600px">
 		<div class="w3-row w3-xlarge w3-padding-16 ">
-			<div class="w3-col  s10">
+			<div class="w3-col s10">
 				<b>Musician Profile</b>
 			</div>
 			<div class="w3-col s2">				
-				<a href="e-profile.php"><img src="upload/<?PHP echo $photo;?>" class="w3-circle w3-border" style="height:70px"></a>
+				<a href="e-profile.php"><img src="upload/<?php echo $photo;?>" class="w3-circle w3-border" style="height:70px"></a>
 			</div>
 		</div>
 	</div>
 </div>
-
 
 <!-- content -->	
 
 <div class="w3-padding" id="contact">
     <div class="w3-content w3-padding" style="max-width:600px">	
-			<?PHP
-			$SQL_music 	= "SELECT * FROM `user` WHERE `id_user` = '$mid_user'  ";
-			$rst_music 	= mysqli_query($con, $SQL_music) ;
-			$dat_music	= mysqli_fetch_array($rst_music);
-			$mphoto		= $dat_music["photo"];
-			if(!$mphoto) $mphoto = "noimage.png";
-			?>
+		<?php
+		$SQL_music = "SELECT * FROM `user` WHERE `id_user` = '$mid_user'";
+		$rst_music = mysqli_query($con, $SQL_music);
+		$dat_music = mysqli_fetch_array($rst_music);
+		$mphoto = $dat_music["photo"] ?? 'noimage.png';
+		?>
 
-			<div class="w3-row">
-				<div class="w3-col s10">
-					<img src="upload/<?PHP echo $mphoto; ?>" class="w3-circle w3-border w3-image" alt="image" style="width:90px;max-width:100px">
-				</div>
-				<div class="w3-col s2 w3-padding-16">
-					<?PHP if($follow_found > 0 ) { ?>
-					<a href="?act=del_favourite&mid_user=<?PHP echo $mid_user;?>"><i class="fa fa-bookmark fa-4x w3-text-green"></i></a>
-					<?PHP } else { ?>
-					<a href="?act=add_favourite&mid_user=<?PHP echo $mid_user;?>"><i class="far fa-bookmark fa-4x"></i></a>
-					<?PHP } ?>
-				</div>
+		<div class="w3-row">
+			<div class="w3-col s10">
+				<img src="upload/<?php echo $mphoto; ?>" class="w3-circle w3-border w3-image" alt="image" style="width:90px;max-width:100px">
 			</div>
-			
-			<hr class="w3-lightbrown" style="height: 3px;">
-			
-			<div class="w3-padding" >
+			<div class="w3-col s2 w3-padding-16">
+				<?php if ($follow_found > 0) { ?>
+				<a href="?act=del_favourite&mid_user=<?php echo $mid_user;?>"><i class="fa fa-bookmark fa-4x w3-text-green"></i></a>
+				<?php } else { ?>
+				<a href="?act=add_favourite&mid_user=<?php echo $mid_user;?>"><i class="far fa-bookmark fa-4x"></i></a>
+				<?php } ?>
+			</div>
+		</div>
+
+		<hr class="w3-lightbrown" style="height: 3px;">
+		
+		<?php if ($dat_music) { ?>
+			<div class="w3-padding">
 				<b>Full Name</b><br>
-				<div class="w3-block w3-padding w3-round-large w3-border"><?PHP echo $dat_music["name"];?></div>
+				<div class="w3-block w3-padding w3-round-large w3-border"><?php echo $dat_music["name"];?></div>
 			</div>
 			
-			<div class="w3-padding" >
+			<div class="w3-padding">
 				<b>Email</b><br>
-				<div class="w3-block w3-padding w3-round-large w3-border"><?PHP echo $dat_music["email"];?></div>
+				<div class="w3-block w3-padding w3-round-large w3-border"><?php echo $dat_music["email"];?></div>
 			</div>
 			
-			<div class="w3-padding" >
+			<div class="w3-padding">
 				<b>Spotify Profile</b><br>
-				<textarea class="w3-block w3-padding w3-round-large w3-border"><?PHP echo $dat_music["spotify"];?></textarea>
+				<textarea class="w3-block w3-padding w3-round-large w3-border"><?php echo $dat_music["spotify"];?></textarea>
 			</div>
+		<?php } else { ?>
+			<p>User not found.</p>
+		<?php } ?>
+
+		<hr class="w3-lightbrown" style="height: 3px;">
+		
+		<?php
+		$bil = 0;
+		$SQL_list = "SELECT * FROM `post` WHERE `id_user` = '$mid_user' ORDER BY id_post DESC";
+		$result = mysqli_query($con, $SQL_list);
+		while ($data = mysqli_fetch_array($result)) {
+			$bil++;
+			$id_post = $data["id_post"];
+			$post = $data["post"];
+			$date = $data["date"];
+			$name = $dat_music["name"];
+			$photo2 = $dat_music["photo"];
+			if (!$photo2) $photo2 = "noimage.png";
+		?>	
+			<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
+				<div class="w3-row w3-small w3-padding-16">
+					<div class="w3-col s3 w3-padding-16 w3-padding-small">
+						<img src="upload/<?php echo $photo2;?>" class="w3-circle w3-image w3-border"></a>
+					</div>
+					<div class="w3-col s7" style="line-height: 1.3;">
+						<b><?php echo $name;?></b><br>
+						<textarea rows="6" class="w3-small w3-block w3-border w3-border-white"><?php echo $post;?></textarea>		
+					</div>
+					<div class="w3-col s2 w3-center">
+						<div class="w3-text-grey"><?php echo get_time_ago(strtotime($date));?></div>
+						<a href="e-review.php?id_post=<?php echo $id_post;?>"><i class="far fa-comment-alt fa-2x w3-padding-small"></i></a>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 		
 		<div class="w3-padding-48"></div>
-		
 	</div>
 </div>
 
 <!-- content end -->
 
-
 <div class="w3-bottom w3-padding">
 	<div class="w3-content w3-padding" style="max-width:600px">
-		<div class="w3-row w3-large w3-white w3-padding-16 ">
-			<div class="w3-col  s6">				
+		<div class="w3-row w3-large w3-white w3-padding-16">
+			<div class="w3-col s6">				
 				<a href="e-allmusician.php"><i class="fa fa-fw fa-arrow-circle-left fa-3x"></i></a>
 			</div>
 		</div>
 	</div>
 </div>
-
 
 </body>
 </html>

@@ -143,6 +143,38 @@ img[alt="www.000webhost.com"]{display:none}
 				<b>Spotify Profile</b><br>
 				<textarea class="w3-block w3-padding w3-round-large w3-border"><?PHP echo $dat_music["spotify"];?></textarea>
 			</div>
+			
+			<hr class="w3-lightbrown" style="height: 3px;">
+
+			<?php
+			$bil = 0;
+			$SQL_list = "SELECT * FROM `post` WHERE `id_user` = '$mid_user' ORDER BY id_post DESC";
+			$result = mysqli_query($con, $SQL_list);
+			while ($data = mysqli_fetch_array($result)) {
+				$bil++;
+				$id_post = $data["id_post"];
+				$post = $data["post"];
+				$date = $data["date"];
+				$name = $dat_music["name"];
+				$photo2 = $dat_music["photo"];
+				if (!$photo2) $photo2 = "noimage.png";
+			?>	
+				<div class="w3-panel w3-border w3-border-brown w3-round-xxlarge">
+					<div class="w3-row w3-small w3-padding-16">
+						<div class="w3-col s3 w3-padding-16 w3-padding-small">
+							<img src="upload/<?php echo $photo2;?>" class="w3-circle w3-image w3-border"></a>
+						</div>
+						<div class="w3-col s7" style="line-height: 1.3;">
+							<b><?php echo $name;?></b><br>
+							<textarea rows="6" class="w3-small w3-block w3-border w3-border-white"><?php echo $post;?></textarea>		
+						</div>
+						<div class="w3-col s2 w3-center">
+							<div class="w3-text-grey"><?php echo get_time_ago(strtotime($date));?></div>
+							<a href="m-review.php?id_post=<?php echo $id_post;?>"><i class="far fa-comment-alt fa-2x w3-padding-small"></i></a>
+						</div>
+					</div>
+				</div>
+			<?php } ?>
 		
 		<div class="w3-padding-48"></div>
 		
