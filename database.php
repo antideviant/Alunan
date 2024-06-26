@@ -1,6 +1,6 @@
 <?PHP
 	/*	-----------------------------
-		Developed by : BelajarPHP.com
+		Developed by : undeviant
 		Date : 16 Apr 2024
 		-----------------------------	*/	
 	//http://alunan.000.pe/index_app.php
